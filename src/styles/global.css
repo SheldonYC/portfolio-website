@@ -1,0 +1,9 @@
+:root {
+  --header-height: 80px;
+  --footer-height: 80px;
+  --background-color: #1D0634;
+}
+
+.MuiToolbar-root {
+  height: var(--header-height);
+}

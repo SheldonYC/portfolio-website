@@ -1,3 +1,0 @@
-1. Use branch to separate feature (git checkout -b feature)
-2. git add -> commit -> push origin feature
-3. git merge faeture (at main branch) -> push origin main
