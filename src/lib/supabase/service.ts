@@ -23,12 +23,9 @@ export async function getProjects(isFeatured: boolean): Promise<CardProps[]> {
   }
 };
 
-export async function getThumbnails(thumbnailUrls: string[]): Promise<string[]> {
-  const expiresIn = 60 * 5; // expires in 5 mins
+export async function getThumbnails(thumbnailPaths: string[]): Promise<string[]> {
   try {
-    const { data, error } = await db.storage.from(process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_ASSETS_BUCKET as string).createSignedUrls(thumbnailUrls.map((url)=>`thumbnails/${url}`), expiresIn);
-    if (error) throw error;
-    return data.map((item)=>item.signedUrl);
+    return thumbnailPaths.map((path)=>`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/storage/v1/object/public/${process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_ASSETS_BUCKET}/thumbnails/${path}`);
   } catch(error) {
     console.log(`Error: /lib/supabase/service - getProjects`, error);
     return [];
@@ -36,14 +33,11 @@ export async function getThumbnails(thumbnailUrls: string[]): Promise<string[]> 
 }
 
 export async function getTechStacksIcons(techstacks: string[]): Promise<techStackIconUrls> {
-  const expiresIn = 60 * 5; // expires in 5 mins
   try {
-    const { data, error } = await db.storage.from(process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_ASSETS_BUCKET as string).createSignedUrls(techstacks.map((tech)=>`techicons/${tech}.svg`), expiresIn);
-    if (error) throw error;
-    return techstacks.reduce((acc, tech, index) => {
-      acc[tech] = data[index].signedUrl;
-      return acc;
-    }, {} as techStackIconUrls);
+    const iconMap: techStackIconUrls = {}
+    techstacks.forEach((tech)=>{
+      iconMap[tech] = `${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_REF}.supabase.co/storage/v1/object/public/${process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_ASSETS_BUCKET}/techicons/${tech}.svg`});
+    return iconMap;
   } catch(error) {
     console.log(`Error: /lib/supabase/service - getTechStacksIcons`, error);
     return {};
