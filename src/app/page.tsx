@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ShootingStars } from '@/components/hero/ShootingStars';
 import { TextLinkButton } from '@/components/button/TextLinkButton';
 import { Carousel } from '@/components/display/Carousel';
-import { CardProps } from '@/components/display/Card';
 import { HeroImageText } from '@/components/hero/HeroImageText';
 import {
   StyledPageWrapper,
@@ -11,11 +10,24 @@ import {
   StyledSectionContent, 
   StyledHeroImageWrapper,
 } from '@/utils/styledComponent';
+import { CardProps } from '@/types/types';
 
-import { getProjects } from '@/firebase/service';
+import { getProjects, getThumbnails, getTechStacksIcons } from '@/supabase/service';
 
 export default async function HomePage() {
   const featuredProjects: CardProps[] = await getProjects(true);
+  const thumbnails: string[] = await getThumbnails(featuredProjects.map(project=>project.imageUrl));
+  const flattenedTechStacks = featuredProjects.reduce((acc, cur) => {
+    cur.techStacks.forEach((tech) => {
+      if (!acc.includes(tech)) acc.push(tech);
+    });
+    return acc;
+  }, [] as string[]);
+  const techStackIconUrls = await getTechStacksIcons(flattenedTechStacks);
+  featuredProjects.forEach((project, index) => {
+    project.imageUrl = thumbnails[index];
+    project.techStackIconUrls = project.techStacks.map((techStack)=>techStackIconUrls[techStack])
+  });
   return (
     <StyledPageWrapper>
       <StyledSectionWrapper id='Home'>

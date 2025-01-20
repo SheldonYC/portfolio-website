@@ -13,19 +13,9 @@ import {
   StyledCardDescription,
   StyledCardAction
 } from '@/utils/styledComponent';
+import { CardProps } from '@/types/types';
 
-
-export interface CardProps {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  techStacks: string[];
-  projectUrl: string;
-  featured: boolean;
-}
-
-export const CardComponent: React.FC<CardProps> = ({id, title, description, imageUrl, techStacks, projectUrl}) => {
+export const CardComponent: React.FC<CardProps> = ({id, title, description, imageUrl, techStacks, techStackIconUrls = [], projectUrl}) => {
   return (
     <StyledCard key={id}>
       {/* matintain 16:9 ratio as the source image */}
@@ -41,10 +31,10 @@ export const CardComponent: React.FC<CardProps> = ({id, title, description, imag
         </StyledCardDescription>
         <StyledCardAction>
           <AvatarGroup max={3} spacing ={8}>
-            {techStacks.map(techName => {
+            {techStacks.map((tech, i) => {
               return (
-                <Tooltip key={`${id}-${techName}`} title={techName}>
-                  <Avatar key={`${id}-${techName}`} alt={techName} src={`/techIcons/${techName}.svg`}/>
+                <Tooltip key={`${id}-${tech}`} title={tech}>
+                  <Avatar key={`${id}-${tech}`} alt={tech} src={`${techStackIconUrls[i]}`}/>
                 </Tooltip>
               )
             })}

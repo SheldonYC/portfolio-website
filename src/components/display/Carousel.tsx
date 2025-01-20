@@ -1,7 +1,8 @@
 'use client';
 import * as React from 'react';
-import { CardProps, CardComponent } from '@/components/display/Card';
+import { CardComponent } from '@/components/display/Card';
 import { StyledCarouselWrapper, StyledSectionContent } from '@/utils/styledComponent';
+import { CardProps } from '@/types/types';
 
 interface CarouselProps {
   data: CardProps[];
