@@ -200,12 +200,8 @@ export  const StyledCarouselWrapper = styled(Box)({
   justifyContent: 'flex-start',
   alignItems: 'center',
   width: '80vw',
-  height: 'fit-content',
-  maxHeight: '576px',
   [theme.breakpoints.only('desktop')]: {
     width: '60vw',
-    height: 'fit-content',
-    maxHeight: '768px',
   },
   overflowX: 'auto',
   overflowY: 'hidden',
@@ -220,12 +216,7 @@ export  const StyledCarouselWrapper = styled(Box)({
 export const StyledCarouselIndexWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'space-evenly',
   alignItems: 'center',
-  // width: '80vw',
-  // [theme.breakpoints.only('desktop')]: {
-  //   width: '60vw',
-  // },
   gap: '8px',
 })
 
@@ -265,11 +256,9 @@ export const StyledCard = styled(Card)({
   backgroundColor: 'transparent',
   width: '80vw',
   height: 'fit-content',
-  maxHeight: '576px',
   [theme.breakpoints.only('desktop')]: {
     width: '60vw',
     height: 'fit-content',
-    maxHeight: '768px',
   },
   scrollSnapAlign: 'start',
 });

@@ -62,7 +62,7 @@ export const Carousel: React.FC<CarouselProps> = ({data}) => {
       <StyledCarouselWrapper ref={carouselRef}>
         {data.map((cardProps, index) => {
           return (
-            <div key={index} ref={(element)=>{cardRefs.current[index] = element}} style={{position: 'relative'}}>
+            <div key={index} ref={(element)=>{cardRefs.current[index] = element}}>
               <CardComponent {...cardProps} />
             </div>
           )
