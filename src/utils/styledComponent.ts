@@ -2,6 +2,7 @@
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
 import Toolbar from '@mui/material/Toolbar';;
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -195,17 +196,43 @@ export const StyledShootingStar = styled('span')({
 
 export  const StyledCarouselWrapper = styled(Box)({
   display: 'flex',
-  flexDirection: 'column',
-  [theme.breakpoints.only('desktop')]: {
-    flexDirection: 'row',
-  },
-  justifyContent: 'center',
+  flexDirection: 'row',
+  justifyContent: 'flex-start',
   alignItems: 'center',
-  width: '100%',
-  height: 'auto',
-  margin: '32px 0',
-  gap: '32px',
+  width: '80vw',
+  height: 'fit-content',
+  maxHeight: '576px',
+  [theme.breakpoints.only('desktop')]: {
+    width: '60vw',
+    height: 'fit-content',
+    maxHeight: '768px',
+  },
+  overflowX: 'auto',
+  overflowY: 'hidden',
+  scrollSnapType:' x mandatory',
+  // hide scroll bar in different platforms
+  scrollbarWidth: 'none',
+  '-webkit-scrollbar': { 
+    display: 'none',
+  }
 });
+
+export const StyledCarouselIndexWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
+  // width: '80vw',
+  // [theme.breakpoints.only('desktop')]: {
+  //   width: '60vw',
+  // },
+  gap: '8px',
+})
+
+export const StyledCarouselIndexButton = styled(IconButton)({
+  color: '#fff',
+})
+
 
 export const StyledLinkButton = styled(Button)({
   margin: '8px',
@@ -240,13 +267,15 @@ export const StyledCard = styled(Card)({
   height: 'fit-content',
   maxHeight: '576px',
   [theme.breakpoints.only('desktop')]: {
-    width: '40vw',
+    width: '60vw',
     height: 'fit-content',
     maxHeight: '768px',
   },
+  scrollSnapAlign: 'start',
 });
 
 export const StyledCardContentWrapper = styled(CardContent)({
+  ':last-child': {paddingBottom: '0'},
   padding: '0',
   margin: '16px 0 0 0',
   width: '100%',
@@ -269,13 +298,13 @@ export const StyledCardTitle = styled(Typography)({
   whiteSpace: 'nowrap',
 });
 
-// Using tailwind css line clamp:3
+// Mimic tailwind css line clamp:2
 export const StyledCardDescription = styled(Typography)({
   width: '100%',
   overflow: 'hidden',
   display: '-webkit-box',
   'WebkitBoxOrient': 'vertical',
-  'WebkitLineClamp': '3'
+  'WebkitLineClamp': '2',
 });
 
 export const StyledCardAction = styled(CardActions)({
@@ -285,6 +314,16 @@ export const StyledCardAction = styled(CardActions)({
   alignItems: 'center',
   width: '100%',
   padding: '8px 0 0 0',
+});
+
+export const StyledAvatar = styled(Avatar)({
+  width: '36px',
+  height: '36px',
+  marginRight: '8px',
+  [theme.breakpoints.only('desktop')]: {
+    width: '64px',
+    height: '64px',
+  },
 });
 
 export const StyledAppBar = styled(AppBar)({

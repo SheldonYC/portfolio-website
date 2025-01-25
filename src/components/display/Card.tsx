@@ -2,7 +2,6 @@
 import * as React from 'react';
 import CardMedia from '@mui/material/CardMedia';
 import Tooltip from '@mui/material/Tooltip';
-import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import { TextLinkButton } from '@/components/button/TextLinkButton';
 import {
@@ -11,7 +10,8 @@ import {
   StyledCardTitleWrapper,
   StyledCardTitle,
   StyledCardDescription,
-  StyledCardAction
+  StyledCardAction,
+  StyledAvatar,
 } from '@/utils/styledComponent';
 import { CardProps } from '@/types/types';
 
@@ -30,11 +30,11 @@ export const CardComponent: React.FC<CardProps> = ({id, title, description, imag
           {description}
         </StyledCardDescription>
         <StyledCardAction>
-          <AvatarGroup max={3} spacing ={8}>
+          <AvatarGroup max={3} sx={{overflow: 'clip'}}>
             {techStacks.map((tech, i) => {
               return (
                 <Tooltip key={`${id}-${tech}`} title={tech}>
-                  <Avatar key={`${id}-${tech}`} alt={tech} src={`${techStackIconUrls[i]}`}/>
+                  <StyledAvatar key={`${id}-${tech}`} alt={tech} src={`${techStackIconUrls[i]}`}/>
                 </Tooltip>
               )
             })}
